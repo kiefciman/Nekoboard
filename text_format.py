@@ -1,0 +1,11 @@
+bold = '\033[1m'
+underline = '\033[4m'
+normal = '\033[0m'
+purple = '\033[95m'
+cyan = '\033[96m'
+blue = '\033[94m'
+green = '\033[92m'
+yellow = '\033[93m'
+red = '\033[91m'
+
+dateformat = '%Y.%m.%d'
