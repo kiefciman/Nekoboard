@@ -57,10 +57,10 @@ def Note(arg, path):
 
 def NoteUsage():
     noteusage = [
-        ['note add/new {category} {content}', 'add new note note containing {content} to {category}, no "" required, multiword {content} supported, press enter after {category} to enter multiline edit mode, press enter on blank line to finish the note'],
+        ['add/new {category} {content}', 'add new note note containing {content} to {category}, no "" required, multiword {content} supported, press enter after {category} to enter multiline edit mode, press enter on blank line to finish the note'],
         ['note categories/cat', 'list all note categories'],
-        ['list {category}/ls', 'list all notes from {category}'],
-        ['delete {category}/del/rm/remove {index}', 'delete note no. {index} from {category}'],
+        ['list/ls {category}', 'list all notes from {category}'],
+        ['delete/del/rm/remove {category} {index}', 'delete note no. {index} from {category}'],
         ['edit/ed {category} {index}', 'edit note no. {index} from {category}']
     ]
 
@@ -125,7 +125,7 @@ def DeleteNote(category, index, file, note_data):
         with open(file, 'w') as f:
             json.dump(note_data, f)
         
-        print('\n ' + red + bold + 'Note removed\n')
+        print('\n' + red + bold + ' Note removed\n')
 
     except:
         if not category in note_data:
@@ -155,12 +155,17 @@ def EditNote(category, index, file, note_data):
 
             note[i] = new_line
 
-        print('')
+        while True:
+            line = input(' > ')
+            if line == '':
+                break
+            note.append(line)
 
         with open(file, 'w') as f:
             json.dump(note_data, f)
+        print(bold + blue + '\n Note saved to ' + category + '\n')
 
-    except:
+    except Exception as e:
         if not category in note_data:
             error = category + ' is not a valid note category'
 
@@ -169,5 +174,6 @@ def EditNote(category, index, file, note_data):
 
         else:
             error = category + ' only contains ' + str(len(note_data[category])) + ' notes'
+            #print(e)
 
         print('\n ' + bold + red + error + '\n')

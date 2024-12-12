@@ -26,7 +26,7 @@ def Nekoboard():
             Project()
 
         case 'journal' | 'journ' | 'jn':
-            Journal()
+            Journal(arg, Path())
 
         case 'money' | 'mon' | 'mn':
             Money()
